@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 15:04:19 by hthomas           #+#    #+#             */
-/*   Updated: 2021/04/08 13:48:57 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/04/09 09:51:07 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	add_to_table(t_list **table, t_data *data, ssize_t const len)
 	ft_lstadd_back(&(table[hash(data->key, SIZE_DATABASE, len)]), ft_lstnew(data));
 }
 
-void	find_value(t_list **table, char const *key, ssize_t const len)
+void	find_value(t_list **table, char *key, ssize_t const len)
 {
 	t_list		*tmp;
 	unsigned int	h;
