@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 15:04:19 by hthomas           #+#    #+#             */
-/*   Updated: 2021/04/09 09:51:07 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/08 09:37:55 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,20 +138,20 @@ int		main(int argc, char const *argv[])
 		size_t	length_key;
 		char	type;
 		t_data	*data;
-		ret--;
+		--ret;
 		line[ret] = 0;
 		type = type_entry(line, &length_key);
 		if (type == ENTRY)
 		{
-			char *tmp_key = strndup(line, length_key);
-			if (!is_in_table(table, tmp_key, length_key))
+			char *key = strndup(line, length_key);
+			if (!is_in_table(table, key, length_key))
 			{
 				set_data(&data, line, length_key);
 				add_to_table(table, data, length_key);
-				free(tmp_key);
+				free(key);
 				continue ;
 			}
-			free(tmp_key);
+			free(key);
 		}
 		else if (type == SEARCH)
 			find_value(table, line, ret);
