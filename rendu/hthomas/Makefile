@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/08 15:05:09 by hthomas           #+#    #+#              #
-#    Updated: 2021/04/08 10:09:28 by hthomas          ###   ########.fr        #
+#    Updated: 2021/12/11 12:12:16 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,9 @@ LIBFT		=	libft.a
 LIBFTDIR	=	libft/
 LIBFTLINK	=	-L $(LIBFTDIR) -lft
 
-SRCS		=	srcs/main.c					\
-				srcs/utils.c
+SRCS		=	srcs/main.c			\
+				srcs/utils.c		\
+				srcs/utils2.c
 
 ########################### EXEC
 all:		$(NAME)

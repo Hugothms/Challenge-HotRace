@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 15:04:19 by hthomas           #+#    #+#             */
-/*   Updated: 2021/12/11 11:53:51 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/11 12:53:49 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,56 +14,6 @@
 
 char	*g_last_value = NULL;
 char	*g_last_key = NULL;
-
-static unsigned int	hash(char const *key, size_t const size_database,
-ssize_t const len)
-{
-	unsigned int	h;
-	ssize_t			i;
-
-	i = 0;
-	h = PRIME_1;
-	while (i < len)
-	{
-		h = (h * PRIME_2 + key[i]) % size_database;
-		i++;
-	}
-	return (h);
-}
-
-char	type_entry(char *line, size_t *length_key)
-{
-	if (line[0] == '!')
-		return (DELETE);
-	else if (contains_equal('=', line, length_key))
-		return (ENTRY);
-	else
-		return (SEARCH);
-}
-
-t_data const	*get_data(t_list const *table)
-{
-	return ((t_data *)(table->content));
-}
-
-bool	is_in_table(t_list **table, char const *key, ssize_t const len)
-{
-	t_list	*tmp;
-	t_list	*start;
-
-	start = table[hash(key, SIZE_DATABASE, len)];
-	if (start)
-	{
-		tmp = start;
-		while (tmp)
-		{
-			if (!strcmp(key, get_data(tmp)->key))
-				return (true);
-			tmp = tmp->next;
-		}
-	}
-	return (false);
-}
 
 void	add_to_table(t_list **table, t_data *data, ssize_t const len)
 {
@@ -125,41 +75,51 @@ void	remove_from_table(t_list ***table, char *key, ssize_t const len)
 	}
 }
 
-int	main(int argc, char const *argv[])
+void	process(t_list **table, char *line, ssize_t ret)
 {
-	t_list	**table;
-	char	*line;
-	ssize_t	ret;
 	size_t	length_key;
 	char	type;
 	t_data	*data;
 	char	*key;
 
+	--ret;
+	line[ret] = 0;
+	type = type_entry(line, &length_key);
+	if (type == ENTRY)
+	{
+		key = strndup(line, length_key);
+		if (!is_in_table(table, key, length_key))
+		{
+			set_data(&data, line, length_key);
+			add_to_table(table, data, length_key);
+			free(key);
+			return ;
+		}
+		free(key);
+	}
+	else if (type == SEARCH)
+		find_value(table, line, ret);
+	else if (type == DELETE)
+		remove_from_table(&table, &line[1], ret - 1);
+}
+
+int	main(int argc, char const *argv[])
+{
+	t_list	**table;
+	char	*line;
+	ssize_t	ret;
+
 	if (argc != 1)
 		return (0);
 	(void) argv;
 	table = init_table();
-	while (!(line = NULL) && (ret = getline(&line, (size_t *)&ret, stdin)) >= 0)
+	line = NULL;
+	ret = getline(&line, (size_t *)&ret, stdin);
+	while (ret >= 0)
 	{
-		--ret;
-		line[ret] = 0;
-		type = type_entry(line, &length_key);
-		if (type == ENTRY)
-		{
-			key = strndup(line, length_key);
-			if (!is_in_table(table, key, length_key))
-			{
-				set_data(&data, line, length_key);
-				add_to_table(table, data, length_key);
-				free(key);
-				continue ;
-			}
-			free(key);
-		}
-		else if (type == SEARCH)
-			find_value(table, line, ret);
-		else if (type == DELETE)
-			remove_from_table(&table, &line[1], ret - 1);
+		process(table, line, ret);
+		line = NULL;
+		ret = getline(&line, (size_t *)&ret, stdin);
 	}
 	if (line)
 		free(line);
