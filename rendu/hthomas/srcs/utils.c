@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 20:00:24 by hthomas           #+#    #+#             */
-/*   Updated: 2021/04/08 09:30:39 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/11 11:47:27 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	set_data(t_data **data, char *line, size_t length_key)
 
 void	free_data(void *content)
 {
-	t_data	*data = content;
+	t_data	*data;
+
+	data = content;
 	if (data->key)
 		free(data->key);
 	free(data);
@@ -42,18 +44,21 @@ void	free_data(void *content)
 
 t_list	**init_table(void)
 {
+	int		i;
 	t_list	**table;
 
 	table = malloc(sizeof(*table) * SIZE_DATABASE);
-	int	i = 0;
+	i = 0;
 	while (i < SIZE_DATABASE)
 		table[i++] = 0;
 	return (table);
 }
 
-void 	free_table(t_list **table)
+void	free_table(t_list **table)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (i < SIZE_DATABASE)
 	{
 		if (table[i])

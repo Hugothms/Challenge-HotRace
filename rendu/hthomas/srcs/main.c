@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 15:04:19 by hthomas           #+#    #+#             */
-/*   Updated: 2021/12/08 09:37:55 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/11 11:53:51 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 char	*g_last_value = NULL;
 char	*g_last_key = NULL;
 
-static unsigned int	hash(char const *key, size_t const size_database, ssize_t const len)
+static unsigned int	hash(char const *key, size_t const size_database,
+ssize_t const len)
 {
 	unsigned int	h;
 	ssize_t			i;
@@ -66,12 +67,13 @@ bool	is_in_table(t_list **table, char const *key, ssize_t const len)
 
 void	add_to_table(t_list **table, t_data *data, ssize_t const len)
 {
-	ft_lstadd_back(&(table[hash(data->key, SIZE_DATABASE, len)]), ft_lstnew(data));
+	ft_lstadd_back(&(table[hash(data->key, SIZE_DATABASE, len)]),
+		ft_lstnew(data));
 }
 
 void	find_value(t_list **table, char *key, ssize_t const len)
 {
-	t_list		*tmp;
+	t_list			*tmp;
 	unsigned int	h;
 
 	if (g_last_key && key && !strcmp(g_last_key, key))
@@ -102,6 +104,7 @@ void	remove_from_table(t_list ***table, char *key, ssize_t const len)
 {
 	t_list			*tmp;
 	unsigned int	h;
+	t_list			*to_del;
 
 	g_last_key = NULL;
 	h = hash(key, SIZE_DATABASE, len);
@@ -112,7 +115,7 @@ void	remove_from_table(t_list ***table, char *key, ssize_t const len)
 		{
 			if (!strcmp(key, get_data(tmp)->key))
 			{
-				t_list *to_del = ft_lstremove_one(&((*table)[h]), tmp);
+				to_del = ft_lstremove_one(&((*table)[h]), tmp);
 				free_data(to_del->content);
 				free(to_del);
 				return ;
@@ -122,28 +125,28 @@ void	remove_from_table(t_list ***table, char *key, ssize_t const len)
 	}
 }
 
-int		main(int argc, char const *argv[])
+int	main(int argc, char const *argv[])
 {
 	t_list	**table;
+	char	*line;
+	ssize_t	ret;
+	size_t	length_key;
+	char	type;
+	t_data	*data;
+	char	*key;
 
 	if (argc != 1)
 		return (0);
 	(void) argv;
 	table = init_table();
-
-	char *line;
-	ssize_t ret;
 	while (!(line = NULL) && (ret = getline(&line, (size_t *)&ret, stdin)) >= 0)
 	{
-		size_t	length_key;
-		char	type;
-		t_data	*data;
 		--ret;
 		line[ret] = 0;
 		type = type_entry(line, &length_key);
 		if (type == ENTRY)
 		{
-			char *key = strndup(line, length_key);
+			key = strndup(line, length_key);
 			if (!is_in_table(table, key, length_key))
 			{
 				set_data(&data, line, length_key);

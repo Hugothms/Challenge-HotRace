@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 15:26:40 by hthomas           #+#    #+#             */
-/*   Updated: 2021/04/08 09:30:45 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/11 11:43:53 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define SEARCH		'S'
 # define DELETE		'D'
 
-typedef struct	s_data
+typedef struct s_data
 {
 	char	*key;
 	char	*value;
@@ -40,5 +40,6 @@ int		contains_equal(char const c, char const *charset, size_t *pos);
 void	free_data(void *content);
 void	set_data(t_data **data, char *line, size_t length_key);
 t_list	**init_table(void);
-void 	free_table(t_list **table);
+void	free_table(t_list **table);
+
 #endif

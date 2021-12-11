@@ -6,7 +6,7 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 13:12:56 by hthomas           #+#    #+#             */
-/*   Updated: 2021/04/07 08:41:42 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/11 11:46:10 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*recurs(int depth, int *ret, int fd)
 	return (out);
 }
 
-int		get_next_line(char **out, int fd)
+int	get_next_line(char **out, int fd)
 {
 	int	ret;
 
@@ -46,29 +46,3 @@ int		get_next_line(char **out, int fd)
 	*out = recurs(0, &ret, fd);
 	return (ret);
 }
-
-// int		main_gnl(int argc, char **argv)
-// {
-// 	int		fd;
-// 	char	*line;
-// 	int		ret;
-
-// 	if (argc == 2)
-// 		fd = open((argv[1]), O_RDONLY);
-// 	else
-// 		fd = 0;
-// 	ret = get_next_line(&line, fd);
-// 	while (ret == 1)
-// 	{
-// 		printf("\nret: %d\nline = |%s|\n", ret, line);
-// 		free(line);
-// 		ret = get_next_line(&line, fd);
-// 	}
-// 	if (ret == 0)
-// 		printf("\nret: %d\nline = |%s|\n", ret, line);
-// 	else if (ret == -1)
-// 		printf("\nret: %d\nline = |%s|\n", ret, line);
-// 	free(line);
-// 	close(fd);
-// 	return (0);
-// }
