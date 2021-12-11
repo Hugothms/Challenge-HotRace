@@ -6,7 +6,7 @@
 #    By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/08 15:05:09 by hthomas           #+#    #+#              #
-#    Updated: 2021/12/11 12:12:16 by hthomas          ###   ########.fr        #
+#    Updated: 2021/12/11 13:37:20 by hthomas          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,26 +18,29 @@ LDFLAGS		=	#-g3 -fsanitize=address #-fsanitize=leak
 
 OBJS		=	$(SRCS:.c=.o)
 INCL		=	includes/
-HEADER		=	$(INCL)$(NAME).h
+HEADER		=	$(INCL)$(NAME).h					\
+				$(INCL)Linked-list.h
 
-LIBFT		=	libft.a
-LIBFTDIR	=	libft/
-LIBFTLINK	=	-L $(LIBFTDIR) -lft
-
-SRCS		=	srcs/main.c			\
-				srcs/utils.c		\
+SRCS		=	srcs/main.c							\
+				srcs/utils.c						\
 				srcs/utils2.c
 
+# linked_list
+SRCS		+=	srcs/linked_list/ft_lstnew.c		\
+				srcs/linked_list/ft_lstadd_front.c	\
+				srcs/linked_list/ft_lstsize.c		\
+				srcs/linked_list/ft_lstremove_one.c	\
+				srcs/linked_list/ft_lstlast.c		\
+				srcs/linked_list/ft_lstadd_back.c	\
+				srcs/linked_list/ft_lstdelone.c		\
+				srcs/linked_list/ft_lstclear.c		\
+				srcs/linked_list/ft_lstiter.c		\
+				srcs/linked_list/ft_lstmap.c		\
 ########################### EXEC
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-	$(MAKE) -C $(LIBFTDIR)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJS) $(LIBFTLINK)
-
-########################### LIBARY
-complib:
-	$(MAKE) -C $(LIBFTDIR)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJS)
 
 ########################### OBJECTS
 %.o:		%.c $(HEADER)
@@ -45,11 +48,9 @@ complib:
 
 ########################### CLEAN
 clean:
-	$(MAKE) -C $(LIBFTDIR) clean
 	rm -f $(OBJS)
 
 fclean: clean
-	$(MAKE) -C $(LIBFTDIR) fclean
 	rm -f $(OBJS)
 	rm -f $(NAME) a.out
 
@@ -57,13 +58,13 @@ re:			fclean all
 .PHONY:		re clean fclean test test_hotrace test_leaks
 # .SILENT:
 
-########################### TEST
+########################### RUN
 
-test:		$(NAME)
+run:		$(NAME)
 	./$<
 
-test_time:		$(NAME)
+run_time:		$(NAME)
 	time ./$<
 
-test_leaks:	$(NAME)
+run_leaks:	$(NAME)
 	leaks -atExit -- ./$<

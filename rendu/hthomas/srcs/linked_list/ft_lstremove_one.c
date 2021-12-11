@@ -6,11 +6,11 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:56:00 by hthomas           #+#    #+#             */
-/*   Updated: 2021/04/07 08:31:59 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/11 13:35:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../../includes/linked_list.h"
 
 /*
 ** Remove the node 'lst' of the list and return it.

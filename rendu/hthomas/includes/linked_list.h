@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   linked_list.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 13:02:45 by hthomas           #+#    #+#             */
-/*   Updated: 2021/12/11 11:45:04 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/11 13:36:41 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef LINKED_LIST_H
+# define LINKED_LIST_H
 
 # include <string.h>
 # include <stddef.h>
@@ -22,8 +22,6 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# include "get_next_line.h"
-
 typedef struct s_list
 {
 	void			*content;
@@ -31,7 +29,7 @@ typedef struct s_list
 }					t_list;
 
 /*
-** linked-list
+** linked_list
 */
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **alst, t_list *new);

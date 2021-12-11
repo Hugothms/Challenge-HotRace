@@ -6,11 +6,11 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 16:49:16 by hthomas           #+#    #+#             */
-/*   Updated: 2021/03/25 16:43:40 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/11 13:35:35 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../../includes/linked_list.h"
 
 /*
 ** Counts the number of nodes in a list

@@ -6,18 +6,19 @@
 /*   By: hthomas <hthomas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 15:26:40 by hthomas           #+#    #+#             */
-/*   Updated: 2021/12/11 12:54:48 by hthomas          ###   ########.fr       */
+/*   Updated: 2021/12/11 13:36:59 by hthomas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HOTRACE_H
 # define HOTRACE_H
 
-# include "../libft/includes/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
+
+# include "linked_list.h"
 
 # define SIZE_DATABASE	1242419
 # define PRIME_1		13
